@@ -1451,8 +1451,8 @@ function _viewportDriftedPastOverscan() {
 }
 
 function drawConnections() {
-  // Rebuild paths on position tick only (no viewport culling — everything always rendered)
-  if (_pathsDirty) {
+  // Rebuild paths once positions are ready (no viewport culling — everything always rendered)
+  if (_pathsDirty && Object.keys(rotPos).length > 0) {
     _rebuildPaths();
   }
   const paths = _visiblePaths;
