@@ -12,7 +12,7 @@
       "label": "Paint"
     },
     "brush": {
-      "color": "#c77dff",
+      "color": "#8bb8d9",
       "label": "Brush"
     },
     "edit": {
@@ -24,7 +24,7 @@
       "label": "Camera"
     },
     "tools": {
-      "color": "#a29bfe",
+      "color": "#8bb8d9",
       "label": "Tools"
     },
     "system": {
@@ -36,7 +36,7 @@
       "label": "I/O"
     },
     "bridge": {
-      "color": "#f72585",
+      "color": "#a29bfe",
       "label": "Bridge"
     },
     "ui": {
