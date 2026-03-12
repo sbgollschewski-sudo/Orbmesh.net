@@ -888,8 +888,7 @@ function updateViewportBounds() {
   vpBottom = (ch - panY) / zoom;
 }
 function inView(cx, cy, margin) {
-  return cx > vpLeft - margin && cx < vpRight + margin
-      && cy > vpTop - margin && cy < vpBottom + margin;
+  return true; // render everything — zoom is magnification, not camera movement
 }
 
 // ══════════════════════════════════════════════════════
@@ -1372,9 +1371,6 @@ function _rebuildPaths() {
     const from = rotPos[conn.f], to = rotPos[conn.t];
     if (!from || !to) return;
     const x1 = from.cx, y1 = from.cy, x2 = to.cx, y2 = to.cy;
-    // Check endpoints AND midpoint — long curved lines can arc through viewport
-    const mx = (x1 + x2) * 0.5, my = (y1 + y2) * 0.5;
-    if (!inView(x1, y1, margin) && !inView(x2, y2, margin) && !inView(mx, my, margin)) return;
     const dx = x2 - x1, dy = y2 - y1;
     const dist = Math.sqrt(dx*dx + dy*dy);
     if (dist < 1) return;
@@ -1455,8 +1451,8 @@ function _viewportDriftedPastOverscan() {
 }
 
 function drawConnections() {
-  // Rebuild paths only when positions ticked OR viewport drifted past overscan buffer
-  if (_pathsDirty || _viewportDriftedPastOverscan()) {
+  // Rebuild paths on position tick only (no viewport culling — everything always rendered)
+  if (_pathsDirty) {
     _rebuildPaths();
   }
   const paths = _visiblePaths;
