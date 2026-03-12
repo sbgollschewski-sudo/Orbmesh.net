@@ -626,7 +626,7 @@ function rebuildLayout() {
     const elevated = ELEVATED_GROUPS.has(g.id);
     g.nodes.forEach(n => {
       nodeOrbit[n.id] = { ring, elevated };
-      nodeColorMap[n.id] = (CAT[g.cat] || {color:'#888'}).color;
+      nodeColorMap[n.id] = (CAT[g.cat] || {color:'#888888'}).color;
       nodeCatMap[n.id] = g.cat;
     });
   });
@@ -1296,7 +1296,7 @@ function drawMiniOrbitalTracks() {
     if (!pos || !inView(pos.cx, pos.cy, 250)) return;
 
     const radii = _getGroupRadii(group);
-    const cat = CAT[group.cat] || {color:'#888'};
+    const cat = CAT[group.cat] || {color:'#888888'};
     const style = hexToRgba(cat.color, 0.07);
     ctx.strokeStyle = style;
     for (let ri = 0; ri < radii.length; ri++) {
@@ -1406,8 +1406,8 @@ function _rebuildPaths() {
     const proxFactor = Math.max(0.15, 1.0 - Math.min(dist / 2000, 0.85));
     const fromBright = 0.15 + Math.min((nodeConns[conn.f] || 0) / mc, 1) * 0.85;
     const toBright = 0.15 + Math.min((nodeConns[conn.t] || 0) / mc, 1) * 0.85;
-    const colorFrom = nodeColorMap[conn.f] || '#666';
-    const colorTo = nodeColorMap[conn.t] || '#666';
+    const colorFrom = nodeColorMap[conn.f] || '#666666';
+    const colorTo = nodeColorMap[conn.t] || '#666666';
     // Pre-build gradient for this path (avoids creating per-frame)
     const grad = ctx.createLinearGradient(x1, y1, x2, y2);
     const rgb1 = hexRgb(colorFrom), rgb2 = hexRgb(colorTo);
@@ -1715,7 +1715,7 @@ function clearSphereCache() {
 
 function drawNodes() {
   GROUPS.forEach(group => {
-    const cat = CAT[group.cat] || {color:'#888',label:'?'};
+    const cat = CAT[group.cat] || {color:'#888888',label:'?'};
 
     group.nodes.forEach(node => {
       const base = nodePos[node.id];
