@@ -1918,6 +1918,7 @@ function _buildFuzzComposite(frameNow) {
   const tile = _fuzzLightTiles[_fuzzFrame];
   if (!tile) return;
   const r = _boundaryRadius;
+  if (r < 10) return; // no layout yet
   const size = r * 2 + 4;
   if (!_fuzzComposite || _fuzzComposite.width !== size) {
     _fuzzComposite = document.createElement('canvas');
