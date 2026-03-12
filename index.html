@@ -2313,20 +2313,22 @@ function applyLiveData(data) {
   fitAll();
 }
 
-// Auto-load: prefer script-tag global, fall back to fetch, then hardcoded
+// ══════════════════════════════════════════════════════
+// START — load data fully before first frame
+// ══════════════════════════════════════════════════════
+function startRendering() {
+  requestAnimationFrame(render);
+}
+
 if (window.__ARCHITECTURE_DATA__) {
   applyLiveData(window.__ARCHITECTURE_DATA__);
+  startRendering();
 } else {
   fetch('architecture_data.json?t=' + Date.now())
     .then(r => r.ok ? r.json() : Promise.reject())
-    .then(data => { applyLiveData(data); })
-    .catch(() => { abstractData(); rebuildLayout(); fitAll(); /* fall back to hardcoded */ });
+    .then(data => { applyLiveData(data); startRendering(); })
+    .catch(() => { abstractData(); rebuildLayout(); fitAll(); startRendering(); });
 }
-
-// ══════════════════════════════════════════════════════
-// START
-// ══════════════════════════════════════════════════════
-requestAnimationFrame(render);
 </script>
 </body>
 </html>
