@@ -1471,7 +1471,7 @@ function drawConnections() {
       if (pi % glowSkip !== 0) continue;
       const p = paths[pi];
       if (p.dist > glowDistCap) continue;
-      ctx.globalAlpha = 0.18 * p.proxFactor;
+      ctx.globalAlpha = 0.12 * p.proxFactor;
       ctx.strokeStyle = p.grad;
       ctx.beginPath();
       ctx.moveTo(p.x1, p.y1);
@@ -1486,7 +1486,7 @@ function drawConnections() {
   ctx.setLineDash([]);
   for (let pi = 0; pi < paths.length; pi++) {
     const p = paths[pi];
-    ctx.globalAlpha = 0.55 * p.proxFactor;
+    ctx.globalAlpha = 0.4 * p.proxFactor;
     ctx.strokeStyle = p.grad;
     ctx.beginPath();
     ctx.moveTo(p.x1, p.y1);
